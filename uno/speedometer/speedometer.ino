@@ -1,6 +1,6 @@
 // Date Created:      May 17, 2019
 // Created By:        Andrew N. Sanchez
-// Project Titled:    Donkey Car Speedometer and Odometer
+// Project Titled:    Donkey Car Speedometer
 // Description:       Displays speed on 4 Digit 7 Segment but sends speed and distance through serial
 
 #include <FlexiTimer2.h>
@@ -23,8 +23,7 @@ byte num[] = {0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90, 0x88, 
 volatile unsigned int counter = 0; // encoder counter
 volatile unsigned int revolutions = 0;  // encoder revolutions
 
-int velocity; 
-int distance;
+float velocity;
 
 void setup() {
   Serial.begin(9600);
@@ -49,27 +48,36 @@ void setup() {
 }
 
 void loop() {
-  Serial.print(velocity);
-  Serial.print(distance);
+  send_speed();
   disp_speed();
 }
 
+void send_speed() {
+  float v = velocity;
+  byte * chunks = (byte *) &v;
+  Serial.write(chunks, 4);  // send float
+}
+
+//currently does not display precision values
 void disp_speed() {
+
+  int v = (int) velocity;  //get current speed
 
   // get digits to display
   byte bit[4];
-  bit[0] = velocity % 10;
-  bit[1] = velocity / 10 % 10;
-  bit[2] = velocity / 100 % 10;
-  bit[3] = velocity / 1000 % 10;
+  bit[0] = v % 10;
+  bit[1] = v / 10 % 10;
+  bit[2] = v / 100 % 10;
+  bit[3] = v / 1000 % 10;
 
   for (int i = 0; i < 4; i++) {
     // Select a single 7-segment display
     chooseCommon(i);
     // Send data to 74HC595
-    writeData(num[bit[3-i]]);
+    int write_val = num[bit[3-i]];
+    // write_val | 0x01                inject decimal
+    writeData(write_val);
     delay(5);
-    writeData(0xff);  // clear displayed value
   }
 }
 
@@ -105,6 +113,5 @@ void a_pin_trigger() {
 // fires after 1 second has passed
 void calc_speed() {
   velocity = revolutions*(2*PI*RADIUS);
-  distance = (2*PI*RADIUS);
   revolutions = 0; // reset revolutions for next revolution count per second
 }
