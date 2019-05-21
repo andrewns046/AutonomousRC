@@ -1,8 +1,8 @@
-"""
-CAR CONFIG
+""" 
+CAR CONFIG 
 
 This file is read by your car application's manage.py script to change the car
-performance.
+performance. 
 
 EXMAPLE
 -----------
@@ -53,7 +53,7 @@ STEERING_LEFT_PWM = 255
 STEERING_RIGHT_PWM = 407
 
 #THROTTLE
-THROTTLE_CHANNEL = 0
+THROTTLE_CHANNEL = 2
 THROTTLE_FORWARD_PWM = 430
 THROTTLE_STOPPED_PWM = 370
 THROTTLE_REVERSE_PWM = 300
@@ -105,7 +105,7 @@ USE_JOYSTICK_AS_DEFAULT = True
 JOYSTICK_MAX_THROTTLE = 0.28
 JOYSTICK_STEERING_SCALE = 1.0
 AUTO_RECORD_ON_THROTTLE = True
-CONTROLLER_TYPE='ps3'           #(ps3|ps4|xbox|nimbus)
+CONTROLLER_TYPE='ps3'           #(ps3|ps4)
 USE_NETWORKED_JS = False
 NETWORK_JS_SERVER_IP = "192.168.0.1"
 JOYSTICK_DEADZONE = 0.0         # when non zero, this is the smallest throttle before recording triggered.
@@ -121,12 +121,8 @@ SEQUENCE_LENGTH = 3
 #IMU
 HAVE_IMU = False
 
-#SOMBRERO
-HAVE_SOMBRERO = False
-
 #RECORD OPTIONS
 RECORD_DURING_AI = False
-USE_REWARDS = False
 
 #LED
 HAVE_RGB_LED = False
@@ -182,22 +178,3 @@ PUB_CAMERA_IMAGES = False
 #meta data. Strings describing location and/or task
 DRIVE_LOCATION = None
 DRIVE_TASK = None
-
-#to give the ai a boost, configure these values to
-AI_LAUNCH_DURATION = 0.0
-AI_LAUNCH_THROTTLE = 0.0
-AI_LAUNCH_ENABLE_BUTTON = 'R2'
-#scale the output of the throttle of the ai pilot for all model types.
-AI_THROTTLE_MULT = 1.0
-
-#path following
-PATH_FILENAME = "donkey_path.pkl"
-PATH_SCALE = 5.0
-PATH_OFFSET = (0, 0)
-PATH_MIN_DIST = 0.3
-PID_P = -10.0
-PID_I = 0.000
-PID_D = -0.2
-PID_THROTTLE = 0.2
-SAVE_PATH_BTN = "cross"
-RESET_ORIGIN_BTN = "triangle"
