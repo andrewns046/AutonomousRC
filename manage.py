@@ -412,6 +412,16 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
                                         zero_pulse=cfg.THROTTLE_STOPPED_PWM, 
                                         min_pulse=cfg.THROTTLE_REVERSE_PWM)
 
+        from donkeycar.parts.encoder import RotaryEncoder
+        #RotaryEncoder(mm_per_tick=22.1600, pin=4, poll_delay=0.1166, debug=False) 
+        # 
+        # this entry is for 3 magnets on the Exceed Magnet drive shaft gear 
+        rpm_sensor = RotaryEncoder(22.1600, 4, 0.05, True) 
+        # 
+        # this entry is for 7 magnets on the Exceed Magnet drive shaft gear 
+        # rpm_sensor = RotaryEncoder(9.50, 4, 0.05, True) 
+        V.add(rpm_sensor, outputs=['meters','meters_second'],threaded=True)
+
         V.add(steering, inputs=['angle'])
         V.add(throttle, inputs=['throttle'])
     
