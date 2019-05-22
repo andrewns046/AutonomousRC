@@ -13,7 +13,7 @@
                             // Change this value according to your encoder
 #define LATCH_PIN 12        // Pin connected to ST_CP of 74HC595（Pin12）
 #define CLK_PIN 13         // Pin connected to SH_CP of 74HC595（Pin11）
-#define DATA_PIN 14        // Pin connected to DS of 74HC595（Pin14）
+#define DATA_PIN 11        // Pin connected to DS of 74HC595（Pin14）
 
 int com_pin[] = {7, 6, 5, 4}; // Common pin (anode) of 4 digit 7-segment disp
 
