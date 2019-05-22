@@ -188,7 +188,7 @@ AI_LAUNCH_DURATION = 0.0
 AI_LAUNCH_THROTTLE = 0.0
 AI_LAUNCH_ENABLE_BUTTON = 'R2'
 #scale the output of the throttle of the ai pilot for all model types.
-AI_THROTTLE_MULT = 1.0
+AI_THROTTLE_MULT = .25  #original value was 1
 
 #path following
 PATH_FILENAME = "donkey_path.pkl"

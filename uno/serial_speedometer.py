@@ -7,4 +7,4 @@ ser.baudrate=9600
 
 while True:
   velocity = read(4) # expecting 4 bytes
-  print(velocity)
+  print(velocity) 
