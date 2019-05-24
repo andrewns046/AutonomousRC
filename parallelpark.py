@@ -6,7 +6,10 @@ import signal
 import RPi.GPIO as GPIO
 import Adafruit_PCA9685
 from t6_encoder import RotaryEncoder
-from VL53L0X_rasp_python/python import VL53L0X
+sys.path.insert(0,'VL53L0X_rasp_python/python')
+
+
+import VL53L0X
 
 #RotaryEncoder(mm_per_tick=22.1600, pin=4, poll_delay=0.1166, debug=False)
 #

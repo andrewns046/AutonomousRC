@@ -26,7 +26,7 @@ class RotaryEncoder():
     def get_distance(self):
         #save the ticks and reset the counter
         ticks = self.counter
-        if(self.debug)
+        if(self.debug):
             print('distance(m):', distance)
         #calculate distance traveled
         return ticks * self.m_per_tick
@@ -41,7 +41,7 @@ class RotaryEncoder():
         seconds = end_time - start_time
         distance = ticks * self.m_per_tick
         velocity = distance / seconds
-        if(self.debug)
+        if(self.debug):
             print('seconds:', seconds)
             print('distance(m):', distance)
             print('velocity(m/s):', velocity)
