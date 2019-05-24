@@ -6,13 +6,13 @@ import signal
 import VL53L1X
 import RPi.GPIO as GPIO
 import Adafruit_PCA9685
-from donkeycar.parts.encoder import RotaryEncoder
+from t6_encoder import RotaryEncoder
 
 
 #RotaryEncoder(mm_per_tick=22.1600, pin=4, poll_delay=0.1166, debug=False)
 #
 # this entry is for 3 magnets on the Exceed Magnet drive shaft gear
-rpm_sensor = RotaryEncoder(22.1600, 4, 0.05, True)
+rpm_sensor = RotaryEncoder(22.1600, 4, True)
 
 #initialize modules
 tof = VL53L1X.VL53L1X(i2c_bus=1, i2c_address=0x29)
@@ -24,8 +24,8 @@ pwm = Adafruit_PCA9685.PCA9685()
 servo_min = 255
 servo_max = 407
 servo_center = 331
-alpha = 407
-beta = 255
+alpha = 255
+beta = 407
 
 throttle_center = 360
 throttle_forward = 370
