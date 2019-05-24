@@ -53,7 +53,7 @@ STEERING_LEFT_PWM = 255
 STEERING_RIGHT_PWM = 407
 
 #THROTTLE
-THROTTLE_CHANNEL = 0
+THROTTLE_CHANNEL = 2
 THROTTLE_FORWARD_PWM = 430
 THROTTLE_STOPPED_PWM = 370
 THROTTLE_REVERSE_PWM = 300
@@ -188,7 +188,7 @@ AI_LAUNCH_DURATION = 0.0
 AI_LAUNCH_THROTTLE = 0.0
 AI_LAUNCH_ENABLE_BUTTON = 'R2'
 #scale the output of the throttle of the ai pilot for all model types.
-AI_THROTTLE_MULT = .25  #original value was 1
+AI_THROTTLE_MULT = 0.8  #original value was 1
 
 #path following
 PATH_FILENAME = "donkey_path.pkl"
