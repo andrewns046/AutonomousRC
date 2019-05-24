@@ -6,20 +6,19 @@ import signal
 import RPi.GPIO as GPIO
 import Adafruit_PCA9685
 from t6_encoder import RotaryEncoder
-sys.path.insert(0,'VL53L0X_rasp_python/python')
-
-
-import VL53L0X
+import VL53L1X
 
 #RotaryEncoder(mm_per_tick=22.1600, pin=4, poll_delay=0.1166, debug=False)
 #
 # this entry is for 3 magnets on the Exceed Magnet drive shaft gear
 rpm_sensor = RotaryEncoder(22.1600, 4, True)
 
-#initialize modules
+#initialize time of flight sensor
 tof = VL53L0X.VL53L0X(i2c_bus=1, i2c_address=0x29)
 tof.open()
 tof.start_ranging(1) # Start ranging, 1 = Short Range, 2 = Medium Range, 3 = Long Range
+
+#initialize pwm board
 pwm = Adafruit_PCA9685.PCA9685()
 
 #define values
@@ -34,6 +33,7 @@ throttle_forward = 370
 throttle_back = 350
 distance_old = 0
 #time_traveled = 0.00
+
 #keep going if no parking space or space too small
 pwm.set_pwm(1, 0, servo_center)
 while True:
