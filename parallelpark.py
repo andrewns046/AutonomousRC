@@ -28,9 +28,9 @@ servo_center = 331
 alpha = 407
 beta = 255
 
-throttle_center = 360
-throttle_forward = 370
-throttle_back = 350
+throttle_center = 370
+throttle_forward = 380
+throttle_back = 360
 distance_old = 0
 #time_traveled = 0.00
 
@@ -39,6 +39,8 @@ pwm.set_pwm(1, 0, servo_center)
 while True:
     pwm.set_pwm(2, 0, throttle_forward)
     distance1 = tof.get_distance()
+    print("TOF:")
+    print(distance1)
     difference = distance1 - distance_old
     if(difference > 120):
         print("edge 1 detected")
