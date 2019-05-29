@@ -110,6 +110,30 @@ while True:
 #===========================================================================
 
 print("Start parallel parking...")
+#back up for 1 sec
+#pwm.set_pwm(2, 0, throttle_back)
+#time.sleep(0.05)
+#pwm.set_pwm(2, 0, throttle_center)
+#time.sleep(0.05)
+pwm.set_pwm(2, 0, throttle_back)
+time.sleep(0.9)
 
+#turn right and back up for 1 sec
+pwm.set_pwm(1, 0, alpha)
+time.sleep(0.6)
+#turn left and back up for 1 sec
+pwm.set_pwm(1, 0, beta)
+time.sleep(0.8)
+#finish
+pwm.set_pwm(2, 0, throttle_center)
+pwm.set_pwm(1, 0, servo_center)
+time.sleep(0.05)
+pwm.set_pwm(2, 0, throttle_forward)
+time.sleep(0.05)
+pwm.set_pwm(2, 0, throttle_center)
+time.sleep(0.05)
+pwm.set_pwm(2, 0, throttle_forward)
+time.sleep(0.1)
+pwm.set_pwm(2, 0, throttle_center)
 
 print("parking completed!")
