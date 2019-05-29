@@ -38,17 +38,26 @@ throttle_back = 350
 distance_old = 0
 #time_traveled = 0.00
 
+
+def brake():
+    pwm.set_pwm(2, 0, throttle_center)
+    time.sleep(0.05)
+    pwm.set_pwm(2, 0, throttle_back)
+    time.sleep(0.05)
+    pwm.set_pwm(2, 0, throttle_center)
+    time.sleep(0.05)
+
 # tell the car how far you want it to travel
-def drive(self, distance, direction):
+def drive(distance, direction):
     start_dist = encoder.get_distance()
-    pwm.set_pwm(2, 0, self.throttle_center) #stop car
+    pwm.set_pwm(2, 0, throttle_center) #stop car
 
     throttle = 0;
 
     if( direction == "forward"):
-        throttle = self.throttle_forward
+        throttle = throttle_forward
     else if( direction == "reverse"):
-        throttle = self.throttle_back
+        throttle = throttle_back
     else:
         print("Err:\tIncorrect direction definition")
         return
@@ -61,18 +70,17 @@ def drive(self, distance, direction):
 # give it angle and turn wheels accordingly
 def turn_wheels(angle):
 
-
 #keep going if no parking space or space too small
+
+#========================EDGE DETECT========================================
 pwm.set_pwm(1, 0, servo_center)
 while True:
     pwm.set_pwm(2, 0, throttle_forward)
-    #edge detect
     distance1 = tof.get_distance()
     difference = distance1 - distance_old
     if(difference > 120):
         print("edge 1 detected")
         dist1 = encoder.get_distance();
-        # insert distance traveled
     if(difference < -120):
         print("edge 2 detected")
         # insert distance traveled
@@ -83,41 +91,18 @@ while True:
         # 1.5 x the length of car 630 mm
         if(distance > spot_length):
             print("Parking spot found ")
-            pwm.set_pwm(2, 0, throttle_center)
-            time.sleep(0.05)
-            pwm.set_pwm(2, 0, throttle_back)
-            time.sleep(0.05)
-            pwm.set_pwm(2, 0, throttle_center)
-            time.sleep(0.05)
+            b_dist1 = encoder.get_distance()
+            brake();
+            b_dist2 = encoder.get_distance()
+            print("stop err:\t" +b_dist2-b_dist1);
             break
         else:
             print("spot too small!")
-
     distance_old = distance1
-print("Start parallel parking...")
-#back up for 1 sec
-#pwm.set_pwm(2, 0, throttle_back)
-#time.sleep(0.05)
-#pwm.set_pwm(2, 0, throttle_center)
-#time.sleep(0.05)
-pwm.set_pwm(2, 0, throttle_back)
-time.sleep(0.9)
 
-#turn right and back up for 1 sec
-pwm.set_pwm(1, 0, alpha)
-time.sleep(0.6)
-#turn left and back up for 1 sec
-pwm.set_pwm(1, 0, beta)
-time.sleep(0.8)
-#finish
-pwm.set_pwm(2, 0, throttle_center)
-pwm.set_pwm(1, 0, servo_center)
-time.sleep(0.05)
-pwm.set_pwm(2, 0, throttle_forward)
-time.sleep(0.05)
-pwm.set_pwm(2, 0, throttle_center)
-time.sleep(0.05)
-pwm.set_pwm(2, 0, throttle_forward)
-time.sleep(0.1)
-pwm.set_pwm(2, 0, throttle_center)
+#===========================================================================
+
+print("Start parallel parking...")
+
+
 print("parking completed!")
