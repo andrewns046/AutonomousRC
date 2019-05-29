@@ -56,7 +56,7 @@ def drive(distance, direction):
 
     if( direction == "forward"):
         throttle = throttle_forward
-    else if( direction == "reverse"):
+    elif( direction == "reverse"):
         throttle = throttle_back
     else:
         print("Err:\tIncorrect direction definition")
@@ -71,9 +71,9 @@ def drive(distance, direction):
 def turn_wheels(direction):
     if(direction == "right"):
         pwm.set_pwm(1, 0,servo_max)
-    else if( direction == "center"):
+    elif( direction == "center"):
         pwm.set_pwm(1, 0, servo_center)
-    else if( direction == "left"):
+    elif( direction == "left"):
         pwm.set_pwm(1, 0, servo_min)
 
 
