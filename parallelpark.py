@@ -68,7 +68,14 @@ def drive(distance, direction):
         dist_travled = encoder.get_distance()
 
 # give it angle and turn wheels accordingly
-def turn_wheels(angle):
+def turn_wheels(direction):
+    if(direction == "right"):
+        pwm.set_pwm(1, 0,servo_max)
+    else if( direction == "center"):
+        pwm.set_pwm(1, 0, servo_center)
+    else if( direction == "left"):
+        pwm.set_pwm(1, 0, servo_min)
+
 
 #keep going if no parking space or space too small
 
