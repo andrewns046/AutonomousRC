@@ -41,12 +41,13 @@ class RotaryEncoder():
 
         #calculate elapsed time and distance traveled
         seconds = end_time - start_time
-        distance = ticks * self.m_per_tick
+        ticks = self.counter
+        distance = ticks * self.mm_per_tick
         velocity = distance / seconds
         if(self.debug):
             print('seconds:', seconds)
-            print('distance(m):', distance)
-            print('velocity(m/s):', velocity)
+            # print('distance(mm):', distance)
+            # print('velocity(mm/s):', velocity)
 
         return velocity
 

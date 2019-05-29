@@ -27,7 +27,7 @@ alpha = 407
 beta = 255
 
 #equation variables
-spot_length = 670  # 1.5 x the length of car in mm
+spot_length = 63  # 1.5 x the length of car in mm
 spot_width = 180 # width of the spot
 wheel_distance = 254 # distance between the front and back wheel 254 mm
 half_width = 80 # half width of the car is 80 mm
@@ -92,11 +92,11 @@ while True:
         print("edge 2 detected")
         # insert distance traveled
         miles2 = encoder.get_distance();
-        miles = dist2 - dist1;
+        miles = miles2 - miles1;
         print("distance travled:", miles);
         #if distance travled > a little more than length of the car
         # 1.5 x the length of car 630 mm
-        if(distance > spot_length):
+        if(miles > spot_length):
             print("Parking spot found ")
             b_dist1 = encoder.get_distance()
             brake();
@@ -116,14 +116,14 @@ print("Start parallel parking...")
 #pwm.set_pwm(2, 0, throttle_center)
 #time.sleep(0.05)
 pwm.set_pwm(2, 0, throttle_back)
-time.sleep(0.9)
+time.sleep(0.45)
 
 #turn right and back up for 1 sec
 pwm.set_pwm(1, 0, alpha)
-time.sleep(0.6)
+time.sleep(1.2)
 #turn left and back up for 1 sec
 pwm.set_pwm(1, 0, beta)
-time.sleep(0.8)
+time.sleep(1.1)
 #finish
 pwm.set_pwm(2, 0, throttle_center)
 pwm.set_pwm(1, 0, servo_center)
@@ -135,5 +135,7 @@ time.sleep(0.05)
 pwm.set_pwm(2, 0, throttle_forward)
 time.sleep(0.1)
 pwm.set_pwm(2, 0, throttle_center)
+
+GPIO.cleanup()
 
 print("parking completed!")
