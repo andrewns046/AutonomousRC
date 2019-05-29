@@ -15,7 +15,7 @@ class RotaryEncoder():
         GPIO.add_event_detect(pin, GPIO.RISING, callback=self.isr)
 
         # initialize the odometer values
-        self.m_per_tick = mm_per_tick / 1000.0
+        self.mm_per_tick = mm_per_tick
         self.last_time = time.time()
         self.counter = 0
         self.debug = debug
@@ -26,10 +26,12 @@ class RotaryEncoder():
     def get_distance(self):
         #save the ticks
         ticks = self.counter
+        print('ticks:', ticks)
+        distance = ticks * self.mm_per_tick
         if(self.debug):
-            print('distance(m):', distance)
+            print('distance(m):',distance)
         #calculate distance traveled
-        return ticks * self.m_per_tick
+        return distance
 
     def get_velocity(self):
         #save off the last time interval and reset the timer

@@ -9,7 +9,7 @@ from t6_encoder import RotaryEncoder
 import VL53L1X
 
 #RotaryEncoder
-encoder = RotaryEncoder(22.1600, 13, True)
+encoder = RotaryEncoder(22.1600, 7, True)
 
 #initialize time of flight sensor
 tof = VL53L1X.VL53L1X(i2c_bus=1, i2c_address=0x29)
@@ -27,14 +27,14 @@ alpha = 407
 beta = 255
 
 #equation variables
-spot_length = 630  # 1.5 x the length of car in mm
+spot_length = 670  # 1.5 x the length of car in mm
 spot_width = 180 # width of the spot
 wheel_distance = 254 # distance between the front and back wheel 254 mm
 half_width = 80 # half width of the car is 80 mm
 
-throttle_center = 360
-throttle_forward = 370
-throttle_back = 350
+throttle_center = 370
+throttle_forward = 380
+throttle_back = 360
 distance_old = 0
 #time_traveled = 0.00
 
@@ -87,13 +87,13 @@ while True:
     difference = distance1 - distance_old
     if(difference > 120):
         print("edge 1 detected")
-        dist1 = encoder.get_distance();
+        miles1 = encoder.get_distance();
     if(difference < -120):
         print("edge 2 detected")
         # insert distance traveled
-        dist2 = encoder.get_distance();
-        distance = dist2 - dist1;
-        print("distance travled: " + distance);
+        miles2 = encoder.get_distance();
+        miles = dist2 - dist1;
+        print("distance travled:", miles);
         #if distance travled > a little more than length of the car
         # 1.5 x the length of car 630 mm
         if(distance > spot_length):
@@ -101,7 +101,7 @@ while True:
             b_dist1 = encoder.get_distance()
             brake();
             b_dist2 = encoder.get_distance()
-            print("stop err:\t" +b_dist2-b_dist1);
+            print("stop err:\t",b_dist2-b_dist1);
             break
         else:
             print("spot too small!")
