@@ -24,7 +24,7 @@ class RotaryEncoder():
         self.counter += 1
 
     def get_distance(self):
-        #save the ticks and reset the counter
+        #save the ticks
         ticks = self.counter
         if(self.debug):
             print('distance(m):', distance)
