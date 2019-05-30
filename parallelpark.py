@@ -82,7 +82,24 @@ def turn_wheels(direction):
 #========================EDGE DETECT========================================
 pwm.set_pwm(1, 0, servo_center)
 while True:
-    pwm.set_pwm(2, 0, throttle_forward)
+    listener.start()
+    on_press(up):
+        pwm.set_pwm(2, 0, throttle_forward)
+    on_release(up):
+        pwm.set_pwm(2, 0, throttle_center)
+    on_press(down):
+        pwm.set_pwm(2, 0, throttle_reverse)
+    on_release(down):
+        pwm.set_pwm(2, 0, throttle_center)
+    on_press(left):
+        pwm.set_pwm(1, 0, servo_min)
+    on_release(left):
+        pwm.set_pwm(1, 0, servo_center)
+    on_press(right):
+        pwm.set_pwm(1, 0, servo_max)
+    on_release(right):
+        pwm.set_pwm(1, 0, servo_center)
+
     distance1 = tof.get_distance()
     difference = distance1 - distance_old
     if(difference > 120):
@@ -102,6 +119,7 @@ while True:
             brake();
             b_dist2 = encoder.get_distance()
             print("stop err:\t" +b_dist2-b_dist1);
+            listener.stop()
             break
         else:
             print("spot too small!")
