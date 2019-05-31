@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 import Adafruit_PCA9685
 from t6_encoder import RotaryEncoder
 import VL53L1X
-
+from pynput import keyboard
 #RotaryEncoder
 encoder = RotaryEncoder(22.1600, 13, True)
 
@@ -83,21 +83,21 @@ def turn_wheels(direction):
 pwm.set_pwm(1, 0, servo_center)
 while True:
     listener.start()
-    on_press(up):
+    def on_press(up):
         pwm.set_pwm(2, 0, throttle_forward)
-    on_release(up):
+    def on_release(up):
         pwm.set_pwm(2, 0, throttle_center)
-    on_press(down):
+    def on_press(down):
         pwm.set_pwm(2, 0, throttle_reverse)
-    on_release(down):
+    def on_release(down):
         pwm.set_pwm(2, 0, throttle_center)
-    on_press(left):
+    def on_press(left):
         pwm.set_pwm(1, 0, servo_min)
-    on_release(left):
+    def on_release(left):
         pwm.set_pwm(1, 0, servo_center)
-    on_press(right):
+    def on_press(right):
         pwm.set_pwm(1, 0, servo_max)
-    on_release(right):
+    def on_release(right):
         pwm.set_pwm(1, 0, servo_center)
 
     distance1 = tof.get_distance()
@@ -129,5 +129,6 @@ while True:
 
 print("Start parallel parking...")
 
+listener.stop()
 
 print("parking completed!")
