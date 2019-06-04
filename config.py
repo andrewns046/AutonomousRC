@@ -77,7 +77,7 @@ MAX_EPOCHS = 100
 SHOW_PLOT = True
 VEBOSE_TRAIN = True
 USE_EARLY_STOP = True
-EARLY_STOP_PATIENCE = 5
+EARLY_STOP_PATIENCE = 20
 MIN_DELTA = .0005
 PRINT_MODEL_SUMMARY = True      #print layers and weights to stdout
 OPTIMIZER = None                #adam, sgd, rmsprop, etc.. None accepts default
@@ -102,7 +102,7 @@ NUM_LAST_LAYERS_TO_TRAIN = 7
 
 #JOYSTICK
 USE_JOYSTICK_AS_DEFAULT = True
-JOYSTICK_MAX_THROTTLE = 0.28
+JOYSTICK_MAX_THROTTLE = 0.6
 JOYSTICK_STEERING_SCALE = 1.0
 AUTO_RECORD_ON_THROTTLE = True
 CONTROLLER_TYPE='ps3'           #(ps3|ps4|xbox|nimbus)
@@ -188,7 +188,7 @@ AI_LAUNCH_DURATION = 0.0
 AI_LAUNCH_THROTTLE = 0.0
 AI_LAUNCH_ENABLE_BUTTON = 'R2'
 #scale the output of the throttle of the ai pilot for all model types.
-AI_THROTTLE_MULT = 0.8  #original value was 1
+AI_THROTTLE_MULT = 1.1  #original value was 1
 
 #path following
 PATH_FILENAME = "donkey_path.pkl"
