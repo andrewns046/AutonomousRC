@@ -28,7 +28,7 @@ beta = 255
 
 
 #equation variables
-spot_length = 63  # 1.5 x the length of car in mm
+spot_length = 630  # in mm 1.5 x the length of car in mm
 spot_width = 180 # width of the spot
 wheel_distance = 254 # distance between the front and back wheel 254 mm
 half_width = 80 # half width of the car is 80 mm
